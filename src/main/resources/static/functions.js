@@ -4,9 +4,10 @@ $(document).ready(function() {
 });
 
 function registerSearch() {
-	$("#search").submit(function(ev){
+	$("#search").submit(function(event){
 		event.preventDefault();
-		$.get($(this).attr('action'), {q: $("#q").val()}, function(data) {
+		var params=($("#max").val() != 0 ? {q: $("#q").val(),max: $("#max").val()} : {q: $("#q").val()});
+		$.get($(this).attr('action'), params, function(data) {
 			$("#resultsBlock").html(Mustache.render(template, data));
 		});	
 	});
